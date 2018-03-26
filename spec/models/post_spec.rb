@@ -11,4 +11,18 @@ RSpec.describe Post, type: :model do
       expect(scope).to match_array [post]
     end
   end
+
+  describe "with comments" do
+    let!(:post) { create(:post, title: "Hello world!") }
+    let!(:another_post) { create(:post, title: "Another post") }
+
+    let!(:comment) { create(:comment, post: post) }
+    let!(:another_comment) { create(:comment, post: post) }
+
+    let(:scope) { Post.with_comments }
+
+    it "returns only the post" do
+      expect(scope).to match_array [post]
+    end
+  end
 end

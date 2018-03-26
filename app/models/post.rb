@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  has_many :comments
+
   enum status: {
          draft: "draft",
          archived: "archived",
@@ -6,6 +8,10 @@ class Post < ApplicationRecord
        }
 
   scope :title_matches, ->(text) do
+    all
+  end
+
+  scope :with_comments, -> do
     all
   end
 end
